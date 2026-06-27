@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="LigaAccesoDatos/LigaAccesoDatos.csproj" />
+  <Project Path="LigaDeportiva/LigaDeportiva.UI.csproj" />
+  <Project Path="LogicaDeportiva/LogicaDeportiva.csproj" />
+</Solution>
