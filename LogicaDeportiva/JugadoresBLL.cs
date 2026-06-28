@@ -1,4 +1,4 @@
-﻿using LigaAccesoDatos; // accedemos a Jugadores y JugadoresDAL
+﻿using LigaAccesoDatos; 
 using System.Collections.Generic;
 
 namespace LogicaDeportiva
@@ -9,13 +9,11 @@ namespace LogicaDeportiva
 
         public string Registrar(Jugadores J)
         {
-            // Validar ID del equipo (int, debe ser > 0)
             if (J.Id_Equipo <= 0)
             {
                 return "ERROR: Debe seleccionar un equipo.";
             }
 
-            // Validar strings obligatorios
             if (string.IsNullOrWhiteSpace(J.Nombre) ||
                 string.IsNullOrWhiteSpace(J.Apellido) ||
                 string.IsNullOrWhiteSpace(J.Posicion) ||
@@ -26,7 +24,6 @@ namespace LogicaDeportiva
                 return "ERROR: Todos los campos son obligatorios.";
             }
 
-            // Validar número de camiseta (int, debe ser > 0)
             if (J.Numero_Camiseta <= 0)
             {
                 return "ERROR: El número de camiseta debe ser mayor a 0.";
