@@ -8,7 +8,7 @@ namespace LigaAccesoDatos
 {
     public class Equipos
     {
-        public int Id_Equipo { get; set; }
+        public int Id_Equipo { get; set; } = 0;
         public string Nombre_Equipo { get; set; } = string.Empty;
         public string Ciudad { get; set; } = string.Empty;
         public string Estadio { get; set; } = string.Empty;
