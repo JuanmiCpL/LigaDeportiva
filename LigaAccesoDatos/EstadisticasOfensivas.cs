@@ -10,7 +10,7 @@ namespace LigaAccesoDatos
     {
         public int Id_Estadisticas_Ofensivas { get; set; } = 0;
         public int Id_Jugador { get; set; } = 0;
-        public Jugadores Jugadores { get; set; }
+        public Persona Jugadores { get; set; }
         public int Id_Juego { get; set; } = 0;
         public Juegos Juegos { get; set; }
         public int Turnos_Al_Bate_AB { get; set; } = 0;

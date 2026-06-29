@@ -1,10 +1,20 @@
-﻿using System;
+﻿namespace LigaAccesoDatos;
 
-namespace LogicaDeportiva
+public abstract class Persona
 {
-    public abstract class Persona
+    public string Nombre { get; set; } = string.Empty;
+    public string Apellido { get; set; } = string.Empty;
+    public DateTime Fecha_Nacimiento { get; set; }
+
+    public Persona(string nombre, string apellido, DateTime fechaNacimiento)
     {
-        public abstract void Jugador();
-        public abstract void ManagerTecnico();
+        Nombre = nombre;
+        Apellido = apellido;
+        Fecha_Nacimiento = fechaNacimiento;
     }
+
+    public Persona() { }
+
+    public abstract string Jugador();
+    public abstract string ManagerTecnicos();
 }

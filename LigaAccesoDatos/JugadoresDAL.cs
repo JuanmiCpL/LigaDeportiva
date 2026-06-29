@@ -1,6 +1,6 @@
 ﻿using Microsoft.Data.SqlClient;
 using System.Collections.Generic;
-
+using System;
 
 namespace LigaAccesoDatos
 {

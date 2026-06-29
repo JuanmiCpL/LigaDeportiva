@@ -1,8 +1,8 @@
 ﻿using System;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace LigaAccesoDatos
 {
-
     public class Jugadores
     {
         public int Id_Jugador { get; set; } = 0;
@@ -14,7 +14,7 @@ namespace LigaAccesoDatos
         public string Posicion { get; set; } = string.Empty;
         public string Batea { get; set; } = string.Empty;
         public string Lanza { get; set; } = string.Empty;
-        public DateTime Fecha_Nacimiento { get; set; }
+        public DateTime Fecha_Nacimiento { get; set; } = DateTime.Now;
 
     }
 }
