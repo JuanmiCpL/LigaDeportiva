@@ -17,4 +17,8 @@ public abstract class Persona
 
     public abstract string Jugador();
     public abstract string ManagerTecnicos();
+    public virtual string ObtenerInfo()
+    {
+        return $"Nombre: {Nombre} {Apellido} | Fecha Nac.: {Fecha_Nacimiento:dd/MM/yyyy}";
+    }
 }

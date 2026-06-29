@@ -23,5 +23,25 @@ namespace LigaAccesoDatos
         public bool Ganado_w { get; set; }
         public bool Perdido_L { get; set; }
         public bool Salvado_SV { get; set; }
+
+        public EstadisticasPitcheo(int idJugador, int idJuego, double entradasLanzadas,
+                                int hitsPermitidos, int carrerasPermitidas, int carrerasLimpias,
+                                int basesPorBolas, int ponches, int jonronesPermitidos,
+                                bool ganado, bool perdido, bool salvado)
+        {
+            Id_Jugador = idJugador;
+            Id_Juego = idJuego;
+            Entradas_Lanzadas_IP = entradasLanzadas;
+            Hits_Permitidos_H = hitsPermitidos;
+            Carreras_Permitidas_R = carrerasPermitidas;
+            Carreras_Limpias_ER = carrerasLimpias;
+            Bases_Por_Bolas_Concedidas_BB = basesPorBolas;
+            Ponches_Propinados_SO = ponches;
+            Jonrones_Permitidos_HR = jonronesPermitidos;
+            Ganado_w = ganado;
+            Perdido_L = perdido;
+            Salvado_SV = salvado;
+        }
+        public EstadisticasPitcheo() { }
     }
 }

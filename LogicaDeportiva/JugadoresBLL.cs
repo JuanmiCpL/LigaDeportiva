@@ -36,5 +36,10 @@ namespace LogicaDeportiva
         {
             return _dal.ObtenerTodos();
         }
+
+        public string ObtenerInfoPersona(Persona p)
+        {
+            return p.ObtenerInfo();
+        }
     }
 }
