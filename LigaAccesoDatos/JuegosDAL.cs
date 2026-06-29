@@ -34,7 +34,7 @@ namespace LigaAccesoDatos
 
             using (var con = ConexionDB.ObtenerConexion())
             using (var cmd = new SqlCommand(
-                "SELECT Id_Juego, Id_Equipo_Local, Id_Equipo_Visitante, Fecha_Juego, Carrera_Local, Carrera_Visitante, Estado_Juego", con))
+                "SELECT Id_Juego, Id_Equipo_Local, Id_Equipo_Visitante, Fecha_Juego, Carrera_Local, Carrera_Visitante, Estado_Juego FROM Juegos", con))
             using (var reader = cmd.ExecuteReader())
             {
                 while (reader.Read())

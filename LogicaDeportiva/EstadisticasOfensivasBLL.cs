@@ -1,4 +1,4 @@
-﻿using LigaAccesoDatos; // accedemos a EstadisticasOfensivas y EstadisticasOfensivasDAL
+﻿using LigaAccesoDatos; 
 using System.Collections.Generic;
 
 namespace LogicaDeportiva
@@ -9,13 +9,10 @@ namespace LogicaDeportiva
 
         public string Registrar(EstadisticasOfensivas e)
         {
-            // Turnos al bate siempre debe ser mayor a 0
             if (e.Turnos_Al_Bate_AB <= 0)
             {
                 return "ERROR: Los turnos al bate son obligatorios y deben ser mayor a 0.";
             }
-
-            // Los demás stats no pueden ser negativos pero sí pueden ser 0
             if (e.Carreras_Anotadas_R < 0 ||
                 e.Hits_H < 0 ||
                 e.Dobles_2B < 0 ||

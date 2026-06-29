@@ -40,7 +40,7 @@ namespace LigaAccesoDatos
 
             using (var con = ConexionDB.ObtenerConexion())
             using (var cmd = new SqlCommand(
-                "SELECT Id_Estadisticas_Ofensivas, Id_Jugador, Id_Juego, Turnos_Al_Bate_AB, Carreras_Anotadas_R, Hits_H, Dobles_2B, Triples_3B, Jonrones_HR, Carreras_Empujadas_RBI, Bases_Por_Bolas_BB, Ponches_SO, Bases_Robadas_SB", con))
+                "SELECT Id_Estadisticas_Ofensivas, Id_Jugador, Id_Juego, Turnos_Al_Bate_AB, Carreras_Anotadas_R, Hits_H, Dobles_2B, Triples_3B, Jonrones_HR, Carreras_Empujadas_RBI, Bases_Por_Bolas_BB, Ponches_SO, Bases_Robadas_SB FROM EstadisticasOfensivas", con))
             using (var reader = cmd.ExecuteReader())
             {
                 while (reader.Read())

@@ -12,7 +12,7 @@ namespace LigaAccesoDatos
         public string Nombre_Equipo { get; set; } = string.Empty;
         public string Ciudad { get; set; } = string.Empty;
         public string Estadio { get; set; } = string.Empty;
-        public string Fecha_Fundacion { get; set; } = string.Empty;
+        public DateTime Fecha_Fundacion { get; set; }
         public string Nombre_Manager { get; set; } = string.Empty;
     }
 }

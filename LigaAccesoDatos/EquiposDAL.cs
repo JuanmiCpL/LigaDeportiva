@@ -44,7 +44,7 @@ namespace LigaAccesoDatos
                         Nombre_Equipo = reader.GetString(1),
                         Ciudad = reader.GetString(2),
                         Estadio = reader.GetString(3),
-                        Fecha_Fundacion = reader.GetString(4),
+                        Fecha_Fundacion = reader.GetDateTime(4),
                         Nombre_Manager = reader.GetString(5)
                     });
                 }

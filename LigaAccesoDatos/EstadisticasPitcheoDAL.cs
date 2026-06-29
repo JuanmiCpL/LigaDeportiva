@@ -25,7 +25,7 @@ namespace LigaAccesoDatos
                 cmd.Parameters.AddWithValue("@Ponches_Propinados_SO", E.Ponches_Propinados_SO);
                 cmd.Parameters.AddWithValue("@Jonrones_Permitidos_HR", E.Jonrones_Permitidos_HR);
                 cmd.Parameters.AddWithValue("@Ganado_w", E.Ganado_w);
-                cmd.Parameters.AddWithValue("@Perdido_L", E.Ganado_w);
+                cmd.Parameters.AddWithValue("@Perdido_L", E.Perdido_L);
                 cmd.Parameters.AddWithValue("@Salvado_SV", E.Salvado_SV);
 
                 int filas = cmd.ExecuteNonQuery();
@@ -40,7 +40,7 @@ namespace LigaAccesoDatos
 
             using (var con = ConexionDB.ObtenerConexion())
             using (var cmd = new SqlCommand(
-                "SELECT Id_Estadisticas_Pitcheo, Id_Jugador, Id_Juego, Entradas_Lanzadas_IP, Hits_Permitidos_H, Carreras_Permitidas_R, Carreras_Limpias_ER, Bases_Por_Bolas_Concedidas_BB, Ponches_Propinados_SO, Jonrones_Permitidos_HR, Ganado_w, Perdido_L, Salvado_SV", con))
+                "SELECT Id_Estadisticas_Pitcheo, Id_Jugador, Id_Juego, Entradas_Lanzadas_IP, Hits_Permitidos_H, Carreras_Permitidas_R, Carreras_Limpias_ER, Bases_Por_Bolas_Concedidas_BB, Ponches_Propinados_SO, Jonrones_Permitidos_HR, Ganado_w, Perdido_L, Salvado_SV FROM EstadisticasPitcheo", con))
             using (var reader = cmd.ExecuteReader())
             {
                 while (reader.Read())

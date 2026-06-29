@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LigaAccesoDatos
 {
+
     public class Jugadores
     {
         public int Id_Jugador { get; set; } = 0;
@@ -17,6 +14,7 @@ namespace LigaAccesoDatos
         public string Posicion { get; set; } = string.Empty;
         public string Batea { get; set; } = string.Empty;
         public string Lanza { get; set; } = string.Empty;
-        public string Fecha_Nacimiento { get; set; } = string.Empty;
+        public DateTime Fecha_Nacimiento { get; set; }
+
     }
 }

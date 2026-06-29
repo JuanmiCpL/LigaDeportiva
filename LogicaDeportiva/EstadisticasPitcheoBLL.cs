@@ -1,4 +1,4 @@
-﻿using LigaAccesoDatos; // accedemos a EstadisticasPitcheo y EstadisticasPitcheoDAL
+﻿using LigaAccesoDatos; 
 using System.Collections.Generic;
 
 namespace LogicaDeportiva
@@ -9,13 +9,11 @@ namespace LogicaDeportiva
 
         public string Registrar(EstadisticasPitcheo E)
         {
-            // Entradas lanzadas siempre debe ser mayor a 0
             if (E.Entradas_Lanzadas_IP <= 0)
             {
                 return "ERROR: Las entradas lanzadas son obligatorias y deben ser mayor a 0.";
             }
 
-            // Los demás stats numéricos no pueden ser negativos pero sí pueden ser 0
             if (E.Hits_Permitidos_H < 0 ||
                 E.Carreras_Permitidas_R < 0 ||
                 E.Carreras_Limpias_ER < 0 ||
@@ -26,7 +24,6 @@ namespace LogicaDeportiva
                 return "ERROR: Los valores estadísticos no pueden ser negativos.";
             }
 
-            // Ganado_w, Perdido_L y Salvado_SV son bool, no necesitan validación
 
             bool ok = _dal.Insertar(E);
             return ok

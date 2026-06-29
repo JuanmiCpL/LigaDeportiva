@@ -11,8 +11,8 @@ namespace LigaAccesoDatos
         {
             using (var con = ConexionDB.ObtenerConexion())
             using (var cmd = new SqlCommand(@"
-                INSERT INTO Jugadores (Id_Equipo, Nombre, Apellido, Numero_Camiseta, Posicion, Batea, Lanza, Fecha_Nacimineto)
-                VALUES (@Id_Equipo, @Nombre, @Apellido, @Numero_Camiseta, @Posicion, @Batea, @Lanza, @Fecha_Nacimineto)", con))
+                INSERT INTO Jugadores (Id_Equipo, Nombre, Apellido, Numero_Camiseta, Posicion, Batea, Lanza, Fecha_Nacimiento)
+                VALUES (@Id_Equipo, @Nombre, @Apellido, @Numero_Camiseta, @Posicion, @Batea, @Lanza, @Fecha_Nacimiento)", con))
             {
                 // Parámetros con @ evitan SQL Injection
                 cmd.Parameters.AddWithValue("@Id_Equipo", j.Id_Equipo);
@@ -36,7 +36,7 @@ namespace LigaAccesoDatos
 
             using (var con = ConexionDB.ObtenerConexion())
             using (var cmd = new SqlCommand(
-                "SELECT Id_Jugador, Id_Equipo, Nombre, Apellido, Numero_Camiseta, Posicion, Batea, Lanza, Fecha_Nacimineto", con))
+                "SELECT Id_Jugador, Id_Equipo, Nombre, Apellido, Numero_Camiseta, Posicion, Batea, Lanza, Fecha_Nacimineto FROM Jugadores", con))
             using (var reader = cmd.ExecuteReader())
             {
                 while (reader.Read())
@@ -51,7 +51,7 @@ namespace LigaAccesoDatos
                         Posicion = reader.GetString(5),
                         Batea = reader.GetString(6),
                         Lanza = reader.GetString(7),
-                        Fecha_Nacimiento = reader.GetString(8)
+                        Fecha_Nacimiento = reader.GetDateTime(8)
                     });
                 }
             }

@@ -1,4 +1,4 @@
-﻿using LigaAccesoDatos; // accedemos a Equipos y EquiposDAL
+﻿using LigaAccesoDatos;
 using System.Collections.Generic;
 
 namespace LogicaDeportiva
@@ -12,10 +12,13 @@ namespace LogicaDeportiva
             if (string.IsNullOrWhiteSpace(e.Nombre_Equipo) ||
                 string.IsNullOrWhiteSpace(e.Ciudad) ||
                 string.IsNullOrWhiteSpace(e.Estadio) ||
-                string.IsNullOrWhiteSpace(e.Fecha_Fundacion) ||
                 string.IsNullOrWhiteSpace(e.Nombre_Manager))
             {
                 return "ERROR: Todos los campos son obligatorios.";
+            }
+            if (e.Fecha_Fundacion == DateTime.MinValue)
+            {
+                Console.WriteLine("La fecha de fundación es obligatoria");
             }
 
             bool ok = _dal.Insertar(e);
@@ -28,5 +31,24 @@ namespace LogicaDeportiva
         {
             return _dal.ObtenerTodos();
         }
+        public List<Equipos> Buscar(string texto)
+        {
+            List<Equipos> lista = _dal.ObtenerTodos();
+
+            if (string.IsNullOrWhiteSpace(texto))
+            {
+                return lista;
+            }
+
+            texto = texto.Trim();
+
+            return lista.Where(e =>
+                e.Nombre_Equipo.IndexOf(texto, StringComparison.OrdinalIgnoreCase) >= 0 ||
+                e.Ciudad.IndexOf(texto, StringComparison.OrdinalIgnoreCase) >= 0 ||
+                e.Estadio.IndexOf(texto, StringComparison.OrdinalIgnoreCase) >= 0 ||
+                e.Nombre_Manager.IndexOf(texto, StringComparison.OrdinalIgnoreCase) >= 0
+            ).ToList();
+        }
+
     }
 }

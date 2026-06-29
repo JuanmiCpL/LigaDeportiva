@@ -18,10 +18,13 @@ namespace LogicaDeportiva
                 string.IsNullOrWhiteSpace(J.Apellido) ||
                 string.IsNullOrWhiteSpace(J.Posicion) ||
                 string.IsNullOrWhiteSpace(J.Batea) ||
-                string.IsNullOrWhiteSpace(J.Lanza) ||
-                string.IsNullOrWhiteSpace(J.Fecha_Nacimiento))
+                string.IsNullOrWhiteSpace(J.Lanza))
             {
                 return "ERROR: Todos los campos son obligatorios.";
+            }
+            if (J.Fecha_Nacimiento == DateTime.MinValue)
+            {
+                Console.WriteLine("La fecha de nacimeinto es obligatoria");
             }
 
             if (J.Numero_Camiseta <= 0)
