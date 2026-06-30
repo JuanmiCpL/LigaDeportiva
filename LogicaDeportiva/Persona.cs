@@ -1,24 +1,42 @@
-﻿namespace LigaAccesoDatos;
+﻿using System;
+using LigaAccesoDatos;
 
-public abstract class Persona
+namespace LogicaDeportiva
 {
-    public string Nombre { get; set; } = string.Empty;
-    public string Apellido { get; set; } = string.Empty;
-    public DateTime Fecha_Nacimiento { get; set; }
-
-    public Persona(string nombre, string apellido, DateTime fechaNacimiento)
+    public abstract class Persona
     {
-        Nombre = nombre;
-        Apellido = apellido;
-        Fecha_Nacimiento = fechaNacimiento;
-    }
+        public string Nombre { get; set; }
+        public string Apellido { get; set; }
+        public DateTime Fecha_Nacimiento { get; set; }
 
-    public Persona() { }
+        public Persona()
+        {
+            Nombre = string.Empty;
+            Apellido = string.Empty;
+            Fecha_Nacimiento = DateTime.Now;
+        }
 
-    public abstract string Jugador();
-    public abstract string ManagerTecnicos();
-    public virtual string ObtenerInfo()
-    {
-        return $"Nombre: {Nombre} {Apellido} | Fecha Nac.: {Fecha_Nacimiento:dd/MM/yyyy}";
+        public Persona(string nombre, string apellido, DateTime fechaNacimiento)
+        {
+            Nombre = nombre;
+            Apellido = apellido;
+            Fecha_Nacimiento = fechaNacimiento;
+        }
+
+        public abstract string Jugador();
+        public abstract string ManagerTecnicos();
+        public abstract string ObtenerInfo();
+
+        // MÉTODO VIRTUAL PARA PROMEDIO DE BATEO
+        public virtual double CalcularPromBate(EstadisticasOfensivas ofensiva)
+        {
+            return 0;
+        }
+
+        // MÉTODO VIRTUAL PARA ERA
+        public virtual double CalcularERA(EstadisticasPitcheo pitcheo)
+        {
+            return 0;
+        }
     }
 }

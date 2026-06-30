@@ -11,8 +11,10 @@ namespace LigaAccesoDatos
         {
             using (var con = ConexionDB.ObtenerConexion())
             using (var cmd = new SqlCommand(@"
-                INSERT INTO Jugadores (Id_Equipo, Nombre, Apellido, Numero_Camiseta, Posicion, Batea, Lanza, Fecha_Nacimiento)
-                VALUES (@Id_Equipo, @Nombre, @Apellido, @Numero_Camiseta, @Posicion, @Batea, @Lanza, @Fecha_Nacimiento)", con))
+                INSERT INTO Jugadores 
+                (Id_Equipo, Nombre, Apellido, Numero_Camiseta, Posicion, Batea, Lanza, Fecha_Nacimiento)
+                VALUES 
+                (@Id_Equipo, @Nombre, @Apellido, @Numero_Camiseta, @Posicion, @Batea, @Lanza, @Fecha_Nacimiento)", con))
             {
                 // Parámetros con @ evitan SQL Injection
                 cmd.Parameters.AddWithValue("@Id_Equipo", j.Id_Equipo);
@@ -25,7 +27,8 @@ namespace LigaAccesoDatos
                 cmd.Parameters.AddWithValue("@Fecha_Nacimiento", j.Fecha_Nacimiento);
 
                 int filas = cmd.ExecuteNonQuery();
-                return filas > 0;  // true = se insertó al menos 1 fila
+
+                return filas > 0;
             }
         }
 
@@ -35,8 +38,18 @@ namespace LigaAccesoDatos
             var lista = new List<Jugadores>();
 
             using (var con = ConexionDB.ObtenerConexion())
-            using (var cmd = new SqlCommand(
-                "SELECT Id_Jugador, Id_Equipo, Nombre, Apellido, Numero_Camiseta, Posicion, Batea, Lanza, Fecha_Nacimineto FROM Jugadores", con))
+            using (var cmd = new SqlCommand(@"
+                SELECT 
+                    Id_Jugador, 
+                    Id_Equipo, 
+                    Nombre, 
+                    Apellido, 
+                    Numero_Camiseta, 
+                    Posicion, 
+                    Batea, 
+                    Lanza, 
+                    Fecha_Nacimiento 
+                FROM Jugadores", con))
             using (var reader = cmd.ExecuteReader())
             {
                 while (reader.Read())
@@ -55,7 +68,24 @@ namespace LigaAccesoDatos
                     });
                 }
             }
+
             return lista;
+        }
+
+        // ── ELIMINAR ─────────────────────────────────────────────────
+        public bool Eliminar(int idJugador)
+        {
+            using (var con = ConexionDB.ObtenerConexion())
+            using (var cmd = new SqlCommand(@"
+                DELETE FROM Jugadores 
+                WHERE Id_Jugador = @Id_Jugador", con))
+            {
+                cmd.Parameters.AddWithValue("@Id_Jugador", idJugador);
+
+                int filas = cmd.ExecuteNonQuery();
+
+                return filas > 0;
+            }
         }
     }
 }

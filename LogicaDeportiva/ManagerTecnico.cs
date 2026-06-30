@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace LigaAccesoDatos
+namespace LogicaDeportiva
 {
     public class ManagerTecnico : Persona
     {
@@ -23,10 +23,9 @@ namespace LigaAccesoDatos
         {
             return $"Manager: {Nombre} {Apellido}";
         }
-
         public override string ObtenerInfo()
         {
-            return $"MANAGER → {Nombre} {Apellido} | Fecha Nac.: {Fecha_Nacimiento:dd/MM/yyyy}";
+            return $"MANAGER TÉCNICO → {Nombre} {Apellido} | Fecha Nac.: {Fecha_Nacimiento:dd/MM/yyyy}";
         }
     }
 }

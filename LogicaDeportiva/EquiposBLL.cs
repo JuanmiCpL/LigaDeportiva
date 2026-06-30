@@ -31,6 +31,14 @@ namespace LogicaDeportiva
         {
             return _dal.ObtenerTodos();
         }
+        // Busca SOLO por Id
+        public List<Equipos> BuscarPorId(int idEquipo)
+        {
+            List<Equipos> lista = _dal.ObtenerTodos();
+            return lista.Where(e => e.Id_Equipo == idEquipo).ToList();
+        }
+
+        // Busca SOLO por texto (nombre, ciudad, estadio, manager)
         public List<Equipos> Buscar(string texto)
         {
             List<Equipos> lista = _dal.ObtenerTodos();
@@ -49,6 +57,39 @@ namespace LogicaDeportiva
                 e.Nombre_Manager.IndexOf(texto, StringComparison.OrdinalIgnoreCase) >= 0
             ).ToList();
         }
+        public string Eliminar(int idEquipo)
+        {
+            if (idEquipo <= 0)
+            {
+                return "ERROR: Debe seleccionar un equipo válido.";
+            }
 
+            bool ok = _dal.Eliminar(idEquipo);
+
+            return ok
+                ? "OK: Equipo eliminado exitosamente."
+                : "ERROR: No se pudo eliminar el equipo.";
+        }
+        public int Calcular(Equipos e)
+        {
+            if (e == null)
+            {
+                return 0;
+            }
+
+            if (e.Fecha_Fundacion == DateTime.MinValue)
+            {
+                return 0;
+            }
+
+            int edad = DateTime.Now.Year - e.Fecha_Fundacion.Year;
+
+            if (DateTime.Now < e.Fecha_Fundacion.AddYears(edad))
+            {
+                edad--;
+            }
+
+            return edad;
+        }
     }
-}
+} 

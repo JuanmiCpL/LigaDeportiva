@@ -1,7 +1,6 @@
 ﻿using Microsoft.Data.SqlClient;
 using System.Collections.Generic;
-
-
+using System;
 namespace LigaAccesoDatos
 {
     public class EquiposDAL
@@ -50,6 +49,24 @@ namespace LigaAccesoDatos
                 }
             }
             return lista;
+        }
+        public bool Eliminar(int idEquipo)
+        {
+            try
+            {
+                using (var con = ConexionDB.ObtenerConexion())
+                using (var cmd = new SqlCommand("DELETE FROM Equipos WHERE Id_Equipo = @Id_Equipo", con))
+                {
+                    cmd.Parameters.AddWithValue("@Id_Equipo", idEquipo);
+                    int filasAfectadas = cmd.ExecuteNonQuery();
+                    return filasAfectadas > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error al eliminar equipo: " + ex.Message);
+                return false;
+            }
         }
     }
 }

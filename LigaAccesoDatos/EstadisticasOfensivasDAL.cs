@@ -1,7 +1,6 @@
 ﻿using Microsoft.Data.SqlClient;
 using System.Collections.Generic;
 
-
 namespace LigaAccesoDatos
 {
     public class EstadisticasOfensivasDAL
@@ -11,8 +10,10 @@ namespace LigaAccesoDatos
         {
             using (var con = ConexionDB.ObtenerConexion())
             using (var cmd = new SqlCommand(@"
-                INSERT INTO EstadisticasOfensivas (Id_Jugador, Id_Juego, Turnos_Al_Bate_AB, Carreras_Anotadas_R, Hits_H, Dobles_2B, Triples_3B, Jonrones_HR, Carreras_Empujadas_RBI, Bases_Por_Bolas_BB, Ponches_SO, Bases_Robadas_SB)
-                VALUES (@Id_Jugador, @Id_Juego, @Turnos_Al_Bate_AB, @Carreras_Anotadas_R, @Hits_H, @Dobles_2B, @Triples_3B, @Jonrones_HR, @Carreras_Empujadas_RBI, @Bases_Por_Bolas_BB, @Ponches_SO, @Bases_Robadas_SB)", con))
+                INSERT INTO EstadisticasOfensivas 
+                (Id_Jugador, Id_Juego, Turnos_Al_Bate_AB, Carreras_Anotadas_R, Hits_H, Dobles_2B, Triples_3B, Jonrones_HR, Carreras_Empujadas_RBI, Bases_Por_Bolas_BB, Ponches_SO, Bases_Robadas_SB)
+                VALUES 
+                (@Id_Jugador, @Id_Juego, @Turnos_Al_Bate_AB, @Carreras_Anotadas_R, @Hits_H, @Dobles_2B, @Triples_3B, @Jonrones_HR, @Carreras_Empujadas_RBI, @Bases_Por_Bolas_BB, @Ponches_SO, @Bases_Robadas_SB)", con))
             {
                 // Parámetros con @ evitan SQL Injection
                 cmd.Parameters.AddWithValue("@Id_Jugador", E.Id_Jugador);
@@ -29,7 +30,8 @@ namespace LigaAccesoDatos
                 cmd.Parameters.AddWithValue("@Bases_Robadas_SB", E.Bases_Robadas_SB);
 
                 int filas = cmd.ExecuteNonQuery();
-                return filas > 0;  // true = se insertó al menos 1 fila
+
+                return filas > 0;
             }
         }
 
@@ -40,7 +42,21 @@ namespace LigaAccesoDatos
 
             using (var con = ConexionDB.ObtenerConexion())
             using (var cmd = new SqlCommand(
-                "SELECT Id_Estadisticas_Ofensivas, Id_Jugador, Id_Juego, Turnos_Al_Bate_AB, Carreras_Anotadas_R, Hits_H, Dobles_2B, Triples_3B, Jonrones_HR, Carreras_Empujadas_RBI, Bases_Por_Bolas_BB, Ponches_SO, Bases_Robadas_SB FROM EstadisticasOfensivas", con))
+                @"SELECT 
+                    Id_Estadisticas_Ofensivas, 
+                    Id_Jugador, 
+                    Id_Juego, 
+                    Turnos_Al_Bate_AB, 
+                    Carreras_Anotadas_R, 
+                    Hits_H, 
+                    Dobles_2B, 
+                    Triples_3B, 
+                    Jonrones_HR, 
+                    Carreras_Empujadas_RBI, 
+                    Bases_Por_Bolas_BB, 
+                    Ponches_SO, 
+                    Bases_Robadas_SB 
+                  FROM EstadisticasOfensivas", con))
             using (var reader = cmd.ExecuteReader())
             {
                 while (reader.Read())
@@ -63,7 +79,58 @@ namespace LigaAccesoDatos
                     });
                 }
             }
-            return lista; 
+
+            return lista;
+        }
+
+        // ── ELIMINAR ─────────────────────────────────────────────────
+        public bool Eliminar(int idEstadisticaOfensiva)
+        {
+            using (var con = ConexionDB.ObtenerConexion())
+            using (var cmd = new SqlCommand(@"
+                DELETE FROM EstadisticasOfensivas 
+                WHERE Id_Estadisticas_Ofensivas = @Id_Estadisticas_Ofensivas", con))
+            {
+                cmd.Parameters.AddWithValue("@Id_Estadisticas_Ofensivas", idEstadisticaOfensiva);
+
+                int filas = cmd.ExecuteNonQuery();
+
+                return filas > 0;
+            }
+        }
+        // ── ACTUALIZAR ────────────────────────────────────────────────
+        public bool Actualizar(EstadisticasOfensivas e)
+        {
+            using (var con = ConexionDB.ObtenerConexion())
+            using (var cmd = new SqlCommand(@"
+        UPDATE EstadisticasOfensivas SET
+            Turnos_Al_Bate_AB = @Turnos_Al_Bate_AB,
+            Carreras_Anotadas_R = @Carreras_Anotadas_R,
+            Hits_H = @Hits_H,
+            Dobles_2B = @Dobles_2B,
+            Triples_3B = @Triples_3B,
+            Jonrones_HR = @Jonrones_HR,
+            Carreras_Empujadas_RBI = @Carreras_Empujadas_RBI,
+            Bases_Por_Bolas_BB = @Bases_Por_Bolas_BB,
+            Ponches_SO = @Ponches_SO,
+            Bases_Robadas_SB = @Bases_Robadas_SB
+        WHERE Id_Estadisticas_Ofensivas = @Id_Estadisticas_Ofensivas", con))
+            {
+                cmd.Parameters.AddWithValue("@Id_Estadisticas_Ofensivas", e.Id_Estadisticas_Ofensivas);
+                cmd.Parameters.AddWithValue("@Turnos_Al_Bate_AB", e.Turnos_Al_Bate_AB);
+                cmd.Parameters.AddWithValue("@Carreras_Anotadas_R", e.Carreras_Anotadas_R);
+                cmd.Parameters.AddWithValue("@Hits_H", e.Hits_H);
+                cmd.Parameters.AddWithValue("@Dobles_2B", e.Dobles_2B);
+                cmd.Parameters.AddWithValue("@Triples_3B", e.Triples_3B);
+                cmd.Parameters.AddWithValue("@Jonrones_HR", e.Jonrones_HR);
+                cmd.Parameters.AddWithValue("@Carreras_Empujadas_RBI", e.Carreras_Empujadas_RBI);
+                cmd.Parameters.AddWithValue("@Bases_Por_Bolas_BB", e.Bases_Por_Bolas_BB);
+                cmd.Parameters.AddWithValue("@Ponches_SO", e.Ponches_SO);
+                cmd.Parameters.AddWithValue("@Bases_Robadas_SB", e.Bases_Robadas_SB);
+
+                int filas = cmd.ExecuteNonQuery();
+                return filas > 0;
+            }
         }
     }
 }
