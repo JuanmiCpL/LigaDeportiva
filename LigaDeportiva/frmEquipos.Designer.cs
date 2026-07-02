@@ -227,6 +227,7 @@
             // 
             txtId.Location = new Point(209, 39);
             txtId.Name = "txtId";
+            txtId.PlaceholderText = "\"Solo utilizarlo para buscar un equipo ya registrado.\"";
             txtId.Size = new Size(513, 27);
             txtId.TabIndex = 18;
             txtId.TextChanged += aaaaa;
@@ -235,6 +236,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.Cyan;
             ClientSize = new Size(763, 582);
             Controls.Add(txtId);
             Controls.Add(label8);

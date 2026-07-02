@@ -15,6 +15,12 @@ namespace LigaAccesoDatos
         public string Batea { get; set; } = string.Empty;
         public string Lanza { get; set; } = string.Empty;
         public DateTime Fecha_Nacimiento { get; set; } = DateTime.Now;
+        public string Nacionalidad { get; set; } = string.Empty;
+        public decimal Altura { get; set; } = 0;
+        public decimal Peso { get; set; } = 0;
+        public int Temporadas { get; set; } = 0;
+        public bool Activo { get; set; }
+        public bool Importado { get; set; }
 
     }
 }

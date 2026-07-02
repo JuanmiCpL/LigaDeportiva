@@ -123,5 +123,6 @@ namespace LogicaDeportiva
 
             return p.ObtenerInfo();
         }
+
     }
 }

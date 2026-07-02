@@ -6,22 +6,31 @@ namespace LigaAccesoDatos
     public class EquiposDAL
     {
         // ── INSERTAR ─────────────────────────────────────────────────
+        
         public bool Insertar(Equipos e)
         {
-            using (var con = ConexionDB.ObtenerConexion())
-            using (var cmd = new SqlCommand(@"
+            try
+            {
+                using (var con = ConexionDB.ObtenerConexion())
+                using (var cmd = new SqlCommand(@"
                 INSERT INTO Equipos (Nombre_Equipo, Ciudad, Estadio, Fecha_Fundacion, Nombre_Manager)
                 VALUES (@Nombre_Equipo, @Ciudad, @Estadio, @Fecha_Fundacion, @Nombre_Manager)", con))
-            {
-                // Parámetros con @ evitan SQL Injection
-                cmd.Parameters.AddWithValue("@Nombre_Equipo", e.Nombre_Equipo);
-                cmd.Parameters.AddWithValue("@Ciudad", e.Ciudad);
-                cmd.Parameters.AddWithValue("@Estadio", e.Estadio);
-                cmd.Parameters.AddWithValue("@Fecha_Fundacion", e.Fecha_Fundacion);
-                cmd.Parameters.AddWithValue("@Nombre_Manager", e.Nombre_Manager);
+                {
+                    // Parámetros con @ evitan SQL Injection
+                    cmd.Parameters.AddWithValue("@Nombre_Equipo", e.Nombre_Equipo);
+                    cmd.Parameters.AddWithValue("@Ciudad", e.Ciudad);
+                    cmd.Parameters.AddWithValue("@Estadio", e.Estadio);
+                    cmd.Parameters.AddWithValue("@Fecha_Fundacion", e.Fecha_Fundacion);
+                    cmd.Parameters.AddWithValue("@Nombre_Manager", e.Nombre_Manager);
 
-                int filas = cmd.ExecuteNonQuery();
-                return filas > 0;  // true = se insertó al menos 1 fila
+                    int filas = cmd.ExecuteNonQuery();
+                    return filas > 0;
+                }
+            }// true = se insertó al menos 1 fila
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error al insertar Equipos: " + ex.Message);
+                return false;
             }
         }
 
@@ -30,24 +39,32 @@ namespace LigaAccesoDatos
         {
             var lista = new List<Equipos>();
 
-            using (var con = ConexionDB.ObtenerConexion())
-            using (var cmd = new SqlCommand(
-                "SELECT Id_Equipo, Nombre_Equipo, Ciudad, Estadio, Fecha_Fundacion, Nombre_Manager FROM Equipos", con))
-            using (var reader = cmd.ExecuteReader())
+            try
             {
-                while (reader.Read())
+                using (var con = ConexionDB.ObtenerConexion())
+                using (var cmd = new SqlCommand(
+                    "SELECT Id_Equipo, Nombre_Equipo, Ciudad, Estadio, Fecha_Fundacion, Nombre_Manager FROM Equipos", con))
+                using (var reader = cmd.ExecuteReader())
                 {
-                    lista.Add(new Equipos
+                    while (reader.Read())
                     {
-                        Id_Equipo = reader.GetInt32(0),
-                        Nombre_Equipo = reader.GetString(1),
-                        Ciudad = reader.GetString(2),
-                        Estadio = reader.GetString(3),
-                        Fecha_Fundacion = reader.GetDateTime(4),
-                        Nombre_Manager = reader.GetString(5)
-                    });
+                        lista.Add(new Equipos
+                        {
+                            Id_Equipo = reader.GetInt32(0),
+                            Nombre_Equipo = reader.GetString(1),
+                            Ciudad = reader.GetString(2),
+                            Estadio = reader.GetString(3),
+                            Fecha_Fundacion = reader.GetDateTime(4),
+                            Nombre_Manager = reader.GetString(5)
+                        });
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error al obtener equipos: " + ex.Message);
+            }
+
             return lista;
         }
         public bool Eliminar(int idEquipo)
